@@ -1,33 +1,13 @@
-#7. Write a python program to implement NAVIVE BAYES.
-
-import numpy as np
+#7. Write a python program to make CATEGORICALvalues in numeric format for a given dataset.
+# Defining sample Employee Data
 import pandas as pd
-import matplotlib.pyplot as plt
-dataset=pd.read_csv("suv_data.csv")
-dataset.head()
-
-x = dataset.iloc[:,[2,3]].values
-y = dataset.iloc[:,4].values
-
-from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
-
-from sklearn.preprocessing import StandardScaler
-sc = StandardScaler()
-x_train = sc.fit_transform(x_train)
-x_test = sc.transform(x_test)
-
-from sklearn.naive_bayes import GaussianNB
-classifier = GaussianNB()
-classifier.fit(x_train,y_train)
-
-GaussianNB(priors=None, var_smoothing=1e-09)
-
-y_pred = classifier.predict(x_test)
-
-from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test,y_pred)
-print(cm)
-
-from sklearn.metrics import accuracy_score
-print("Accuracy=", accuracy_score(y_test,y_pred))
+EmployeeData=pd.DataFrame({'id': [101,102,103,104,105],
+                        'Gender': ['M','M','M','F','F'],
+                           'Age': [21,25,24,28,25],
+                           'Department':['QA','QA','Dev','Dev','UI'],
+                           'Rating':['A','B','B','C','B'] })
+# Priting data
+print(EmployeeData)
+# Converting Ordinal Variable Rating to numeric
+EmployeeData['Rating'].replace({'A':3, 'B':2, 'C':1}, inplace=True)
+print(EmployeeData)
